@@ -12,7 +12,7 @@ Gem::Specification.new do |s|
   s.email       = ['mitch@catprint.com']
   s.summary     = %q{Access active-record models inside Reactrb components.}
   s.description = %q{Access active-record models inside Reactrb components.  Model data is calculated during pre-rerendering, and then dynamically loaded as components update.}
-  s.post_install_message = %q{As of version 0.8.x, reactive-record depends on reactrb instead of reactive-record. If you have already switched, you can ignore this message.}
+  s.post_install_message = %q{As of version 0.8.x, reactive-record depends on reactrb instead of reactive-ruby. If you have already switched, you can ignore this message.}
 
   s.files = Dir['{app,config,db,lib}/**/*'] + ['MIT-LICENSE', 'Rakefile', 'README.md']
 
