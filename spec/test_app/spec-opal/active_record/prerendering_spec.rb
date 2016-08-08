@@ -43,7 +43,7 @@ describe "prerendering" do
         React::IsomorphicHelpers.load_context
       end
     end
-    `container.load('/test', complete)`
+    `container.load('/test?ts=2', complete)`
   end
 
 end
