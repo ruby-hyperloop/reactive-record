@@ -2,12 +2,13 @@ source "http://rubygems.org"
 gem "rails"
 gem 'sqlite3'
 gem 'react-rails' #, "1.3.3"
-gem 'opal' #, '~> 0.8.0'
-gem 'reactrb'
-gem 'opal-rails', git: "https://github.com/reactrb/opal-rails.git"
+gem 'opal', '~> 0.9.0'
+gem 'reactrb', path: "../../../reactrb"
+gem 'opal-rails'#, git: "https://github.com/reactrb/opal-rails.git"
 gem 'reactive-record', path: "../.."
 gem 'jquery-cookie-rails'
 gem 'byebug'
 gem 'pry-rails'
 gem 'pry-rescue'
-gem 'opal-rspec-rails', git: 'https://github.com/reactrb/opal-rspec-rails.git'
+gem 'opal-rspec-rails', github: 'opal/opal-rspec-rails'
+#gem 'opal-rspec-rails', git: 'https://github.com/reactrb/opal-rspec-rails.git'

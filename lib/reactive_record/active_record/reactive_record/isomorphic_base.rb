@@ -181,6 +181,16 @@ module ReactiveRecord
           true
         end
 
+        def try(*args, &b)
+          if args.empty? && block_given?
+            yield self
+          else
+            send(*args, &b)
+          end
+        rescue
+          nil
+        end
+
       end
     end
 
