@@ -21,7 +21,7 @@ You do nothing to your current active-record models except move them to the mode
 
 There are no docs yet, but you may consider the test cases as a starting point, or have a look at [reactrb todo](https://reactiverb-todo.herokuapp.com/) (live demo [here.](https://reactiverb-todo.herokuapp.com/))
 
-For best results simply use the [reactrb-rails-generator](https://github.com/reactrb/reactrb-rails-installer) to install everything you need into a new or existing rails app.
+For best results simply use the [reactrb-rails-generator](https://github.com/reactrb/reactrb-rails-generator) to install everything you need into a new or existing rails app.
 
 Head on over to [gitter.im](https://gitter.im/reactrb/chat) to ask any questions you might have!
 
