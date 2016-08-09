@@ -1,4 +1,4 @@
-For example assuming you are releasing fix to 0.8.18
+git For example assuming you are releasing fix to 0.8.18
 
 1. Checkout 0-8-stable
 2. Update tests, fix the bug and commit the changes.
