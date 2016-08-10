@@ -28,7 +28,7 @@ describe "prerendering" do
         React::IsomorphicHelpers.load_context
       end
     end
-    `container.load('/test', complete)`
+    `container.load(#{"/test?ts=#{Time.now.to_i}"}, complete)`
   end
 
   async "does not preload everything" do
@@ -43,7 +43,7 @@ describe "prerendering" do
         React::IsomorphicHelpers.load_context
       end
     end
-    `container.load('/test?ts=2', complete)`
+    `container.load(#{"/test?ts=#{Time.now.to_i}"}, complete)`
   end
 
 end

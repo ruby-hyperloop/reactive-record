@@ -18,8 +18,8 @@ ActiveRecord::Schema.define(version: 20160129182544) do
     t.string   "city"
     t.string   "state"
     t.string   "zip"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -34,8 +34,8 @@ ActiveRecord::Schema.define(version: 20160129182544) do
     t.string   "title"
     t.text     "description"
     t.boolean  "complete"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.integer  "user_id"
     t.integer  "comment_id"
   end
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 20160129182544) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
     t.string   "address_street"
     t.string   "address_city"
     t.string   "address_state"
