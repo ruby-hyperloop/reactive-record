@@ -13,6 +13,7 @@ if RUBY_ENGINE == 'opal'
   require "reactive_record/active_record/class_methods"
   require "reactive_record/active_record/instance_methods"
   require "reactive_record/active_record/base"
+  require "reactive_record/active_record/schema"
   require "reactive_record/interval"
 
 else
