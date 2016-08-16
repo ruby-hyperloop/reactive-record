@@ -116,15 +116,29 @@ module ActiveRecord
       Aggregations::AggregationReflection.new(base_class, :composed_of, name, opts)
     end
 
+    # We are defining these two methods here so that the schema load won't convert these to strings
+    def acts_as_taggable(attribute = :tag_list, _opts = {})
+      define_method(attribute) do
+        @backing_record.reactive_get!(attribute)
+      end
+    end
+
+    def serialize(attribute, _type = Hash)
+      define_method(attribute) do
+        @backing_record.reactive_get!(attribute)
+      end
+    end
+
+
     def column_names
       []  # it would be great to figure out how to get this information on the client!  For now we just return an empty array
     end
 
     [
-      "table_name=", "before_validation", "with_options", "validates_presence_of", "validates_format_of",
-      "accepts_nested_attributes_for", "before_create", "after_create", "before_save", "after_save", "before_destroy", "where", "validate",
-      "attr_protected", "validates_numericality_of", "default_scope", "has_attached_file", "attr_accessible",
-      "serialize"
+      "table_name=", "before_validation", "with_options", "validates_presence_of",
+      "validates_format_of", "accepts_nested_attributes_for", "before_create", "after_create",
+      "before_save", "after_save", "before_destroy", "where", "validate", "attr_protected",
+      "validates_numericality_of", "default_scope", "has_attached_file", "attr_accessible"
     ].each do |method|
       define_method(method.to_s) { |*args, &block| }
     end
