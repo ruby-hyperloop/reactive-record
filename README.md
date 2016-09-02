@@ -11,6 +11,8 @@
 
 #### NOTE: reactive-record >= 0.8.x depends on the reactrb gem.  You must [upgrade to reactrb](https://github.com/reactrb/reactrb#upgrading-to-reactrb)
 
+#### NOTE: therubyracer has been removed as a dependency to allow the possibility of using other JS runtimes. Please make sure if you're upgrading that you have it (or another runtime) required in your gemfile.
+
 You do nothing to your current active-record models except move them to the models/public directory (so they are compiled on the client as well as the server.)
 
 * Fully integrated with [Reactrb](https://github.com/reactrb/reactrb) (which is React with a beautiful ruby dsl.)
@@ -48,3 +50,12 @@ module ::ActiveRecord
   end
 end
 ```
+
+## Running tests
+The test suite runs in opal on a rails server, so the test database is actually the test_app's dev database.
+
+* ```cd spec/test_app```
+* ```rake db:reset``` (to prepare the "test" database)
+* ```rails s```
+* visit localhost:3000/spec-opal to run the suite.
+Note: If any tests fail when running the entire suite, there is a good possibility that you will need to run ```rake db:reset``` to fix the database before running the tests again.

@@ -82,6 +82,16 @@ module ActiveRecord
       end
     end
 
+    def load(*attributes, &block)
+      first_time = true
+      ReactiveRecord.load do
+        results = attributes.collect { |attr| @backing_record.reactive_get!(attr, first_time) }
+        results = yield *results if block
+        first_time = false
+        block.nil? && results.count == 1 ? results.first : results
+      end
+    end
+
     def save(opts = {}, &block)
       @backing_record.save(opts.has_key?(:validate) ? opts[:validate] : true, opts[:force], &block)
     end

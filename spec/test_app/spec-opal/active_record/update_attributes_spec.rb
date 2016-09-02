@@ -122,6 +122,63 @@ describe "creating and updating a record" do
     end
   end
 
+  async "load method with no block and one attribute" do
+    React::IsomorphicHelpers.load_context
+    user = User.find_by_email("mitch@catprint.com")
+    user.first_name = "Robert"
+    user.todo_items << TodoItem.new(title: "test")
+    user.load(:detailed_name).then do |detailed_name|
+      async do
+        expect(detailed_name).to be("R. VanDuyn - mitch@catprint.com (3 todos)")
+      end
+    end
+  end
+
+  async "load method with no block and multiple attributes" do
+    React::IsomorphicHelpers.load_context
+    user = User.find_by_email("mitch@catprint.com")
+    user.first_name = "Robert"
+    user.load(:detailed_name, :name).then do |detailed_name, name|
+      async do
+        expect(detailed_name).to be("R. VanDuyn - mitch@catprint.com (2 todos)")
+        expect(name).to be("Robert VanDuyn")
+      end
+    end
+  end
+
+  async "load method with a block and one attribute" do
+    React::IsomorphicHelpers.load_context
+    loop_count = 0
+    user = User.find_by_email("mitch@catprint.com")
+    user.first_name = "Robert"
+    user.load(:detailed_name) do |detailed_name|
+      loop_count += 1
+      detailed_name
+    end.then do |detailed_name|
+      async do
+        expect(loop_count).to eq(2)
+        expect(detailed_name).to be("R. VanDuyn - mitch@catprint.com (2 todos)")
+      end
+    end
+  end
+
+  async "load method with a block and multiple attributes" do
+    React::IsomorphicHelpers.load_context
+    loop_count = 0
+    user = User.find_by_email("mitch@catprint.com")
+    user.first_name = "Robert"
+    user.load(:detailed_name, :name) do |*args|
+      loop_count += 1
+      args
+    end.then do |detailed_name, name|
+      async do
+        expect(loop_count).to eq(2)
+        expect(detailed_name).to be("R. VanDuyn - mitch@catprint.com (2 todos)")
+        expect(name).to be("Robert VanDuyn")
+      end
+    end
+  end
+
   after(:all) do
     User.find_by_last_name("Weaver").destroy
   end

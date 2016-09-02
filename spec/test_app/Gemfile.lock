@@ -10,13 +10,12 @@ GIT
 PATH
   remote: ../..
   specs:
-    reactive-record (0.8.1)
+    reactive-record (0.8.2)
       opal-browser
       opal-rails
       rails (>= 3.2.13)
       react-rails
       reactrb
-      therubyracer
 
 GEM
   remote: http://rubygems.org/
@@ -202,6 +201,7 @@ DEPENDENCIES
   reactive-record!
   reactrb
   sqlite3
+  therubyracer
 
 BUNDLED WITH
    1.12.5
