@@ -25,7 +25,7 @@ For best results simply use the [reactrb-rails-generator](https://github.com/rea
 
 Head on over to [gitter.im](https://gitter.im/reactrb/chat) to ask any questions you might have!
 
-Note: We have dropped suppport for the ability to load the same Class from two different files. If you need this functionality load the following code to your config/application.rb file.
+Note: We have dropped suppport for the ability to have rails load the same Class *automatically* from two different files, one with server side code, and one with client side code. If you need this functionality load the following code to your config/application.rb file.  However we found from experience that this was very confusing, and you are better off to explicitly include modules as needed.
 
 ```ruby
 module ::ActiveRecord
