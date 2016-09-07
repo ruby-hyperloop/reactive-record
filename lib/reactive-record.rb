@@ -1,6 +1,7 @@
 if RUBY_ENGINE == 'opal'
 
   require "reactrb"
+  require "json_parse_patch"
   require "reactive_record/active_record/error"
   require "reactive_record/server_data_cache"
   require "reactive_record/active_record/reactive_record/while_loading"
@@ -18,6 +19,7 @@ if RUBY_ENGINE == 'opal'
 else
 
   require "opal"
+  require "reactrb"
   require "reactive_record/version"
   require "reactive_record/permissions"
   require "reactive_record/engine"
