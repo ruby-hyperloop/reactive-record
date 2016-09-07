@@ -307,10 +307,6 @@ module ReactiveRecord
       end
     end
 
-    def errors
-      @errors ||= ActiveModel::Error.new
-    end
-
     def sync!(hash = {})  # does NOT notify (see saved! for notification)
       @attributes.merge! hash
       @synced_attributes = {}
@@ -352,14 +348,27 @@ module ReactiveRecord
       @errors = nil
     end
 
-    def saving!
-      React::State.set_state(self, self, :saving) unless data_loading?
-      @saving = true
+    def errors
+      @errors ||= ActiveModel::Error.new
+    end
+
+    def errors=(new_errors)
+      @errors = ActiveModel::Error.new(new_errors)
     end
 
     def errors!(errors)
       @saving = false
       @errors = errors and ActiveModel::Error.new(errors)
+    end
+
+    def saving!
+      React::State.set_state(self, self, :saving) unless data_loading?
+      @saving = true
+    end
+
+    def saving?
+      React::State.get_state(self, self)
+      @saving
     end
 
     def saved!  # sets saving to false AND notifies
@@ -370,11 +379,6 @@ module ReactiveRecord
         React::State.set_state(self, self, :error)
       end
       self
-    end
-
-    def saving?
-      React::State.get_state(self, self)
-      @saving
     end
 
     def new?

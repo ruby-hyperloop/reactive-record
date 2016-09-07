@@ -1,7 +1,5 @@
 module ActiveRecord
-
   module InstanceMethods
-
     attr_reader :backing_record
 
     def attributes
@@ -117,6 +115,16 @@ module ActiveRecord
       @backing_record.errors
     end
 
-  end
+    def valid?
+      !@backing_record.errors.messages.any?
+    end
 
+    def validate(&block)
+      load(:errors).then do |new_errors|
+        @backing_record.errors = new_errors
+        React::State.set_state(@backing_record, @backing_record, new_errors.any? ? :error : nil)
+        yield @backing_record.errors if block
+      end
+    end
+  end
 end
