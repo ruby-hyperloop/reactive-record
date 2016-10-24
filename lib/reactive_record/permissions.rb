@@ -1,3 +1,5 @@
+require_relative 'reactive_record_association_extensions'
+
 module ReactiveRecord
   class AccessViolation < StandardError
     def message
@@ -7,8 +9,13 @@ module ReactiveRecord
 end
 
 class ActiveRecord::Base
+  prepend ReactiveRecordAssociationExtensions
 
   attr_accessor :acting_user
+
+  class << self
+    attr_reader :reactive_record_association_keys
+  end
 
   def create_permitted?
     true
@@ -53,33 +60,6 @@ class ActiveRecord::Base
     end
     true
   end
-
-  class << self
-
-    attr_reader :reactive_record_association_keys
-
-    [:has_many, :belongs_to, :composed_of].each do |macro|
-      define_method "#{macro}_with_reactive_record_add_changed_method".to_sym do |attr_name, *args, &block|
-        define_method "#{attr_name}_changed?".to_sym do
-          instance_variable_get "@reactive_record_#{attr_name}_changed".to_sym
-        end
-        (@reactive_record_association_keys ||= []) << attr_name
-        send "#{macro}_without_reactive_record_add_changed_method".to_sym, attr_name, *args, &block
-      end
-      alias_method_chain macro, :reactive_record_add_changed_method
-    end
-
-    def belongs_to_with_reactive_record_add_is_method(attr_name, scope = nil, options = {})
-      define_method "#{attr_name}_is?".to_sym do |model|
-        send(options[:foreign_key] || "#{attr_name}_id") == model.id
-      end
-      belongs_to_without_reactive_record_add_is_method(attr_name, scope, options)
-    end
-
-    alias_method_chain :belongs_to, :reactive_record_add_is_method
-
-  end
-
 
   def check_permission_with_acting_user(user, permission, *args)
     old = acting_user

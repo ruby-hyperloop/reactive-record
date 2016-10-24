@@ -10,7 +10,7 @@ GIT
 PATH
   remote: ../..
   specs:
-    reactive-record (0.8.3)
+    reactive-record (0.8.4)
       opal-browser
       opal-rails
       rails (>= 3.2.13)
