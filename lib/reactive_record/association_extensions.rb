@@ -1,4 +1,4 @@
-module ReactiveRecordAssociationExtensions
+module AssociationExtensions
   module ClassMethods
     [:has_many, :belongs_to, :composed_of].each do |macro|
       define_method macro.to_sym do |attr_name, *args, &block|

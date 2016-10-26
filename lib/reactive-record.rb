@@ -21,6 +21,7 @@ else
   require "opal"
   require "reactrb"
   require "reactive_record/version"
+  require "reactive_record/association_extensions"
   require "reactive_record/permissions"
   require "reactive_record/engine"
   require "reactive_record/server_data_cache"

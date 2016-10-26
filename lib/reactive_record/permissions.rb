@@ -1,5 +1,3 @@
-require_relative 'reactive_record_association_extensions'
-
 module ReactiveRecord
   class AccessViolation < StandardError
     def message
@@ -9,7 +7,7 @@ module ReactiveRecord
 end
 
 class ActiveRecord::Base
-  prepend ReactiveRecordAssociationExtensions
+  prepend AssociationExtensions
 
   attr_accessor :acting_user
 
