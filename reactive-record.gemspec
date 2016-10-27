@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency 'rspec-rails'
   s.add_development_dependency 'pry'
   s.add_development_dependency 'therubyracer'
+  s.add_development_dependency 'rubocop'
 
   s.add_dependency 'opal-rails'
   s.add_dependency 'opal-browser'

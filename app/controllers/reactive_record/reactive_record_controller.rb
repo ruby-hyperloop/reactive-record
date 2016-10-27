@@ -38,6 +38,13 @@ module ReactiveRecord
       render json: {error: e.message, backtrace: e.backtrace}, status: 500
     end
 
+    def compute
+      response = Object.const_get(params[:class]).send(params[:method], params[:args])
+      render json: { response: response }
+    rescue StandardError => e
+      render json: { error: e.message, backtrace: e.backtrace, status: 500 }
+    end
+
     private
 
     def json_params
