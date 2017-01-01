@@ -92,6 +92,16 @@ end
 ```
 Note that with Reactive Record ` @posts = Post.all` is set in `before_mount` whereas if you were using a a REST based `GET` you would have done so in `after_mount`. Setting the value of `@posts` in `before_mount` means you do not have to worry about nil values while prerendering. The actual query to the server is not initiated at this stage, but when the component is rendering.
 
+### Rails 5
+In Rails 5 all models suppose to derive from `ApplicationRecord`. Consequently `ApplicationRecord` has to be present in `app/models/public`.
+
+```ruby
+# app/models/public/application_record.md
+class ApplicationRecord < ActiveRecord::Base
+  self.abstract_class = true
+end
+
+```
 ## Live updates via Synchromesh
 
 [Synchromesh](https://github.com/reactrb/synchromesh) if fully integrated with Reactive Record. Changes in records are broadcast (after filtering for security) to the clients and Reactrb updates the page if and only if the user is viewing a component containing data that has changed.
