@@ -426,8 +426,14 @@ module ReactiveRecord
               method
             end
           end
+
           reactive_records[model_to_save[:id]] = vectors[vector] = record = find_record(model, id, vector, save)
-          if record and record.respond_to?(:id) and record.id
+
+          next unless record
+
+          if attributes.empty?
+            dont_save_list << record unless save
+          elsif record.respond_to?(:id) && record.id
             # we have an already exising activerecord model
             keys = record.attributes.keys
             attributes.each do |key, value|
